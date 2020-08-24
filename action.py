@@ -12,8 +12,8 @@ from statistik import *
 
 # Variablen
 dir = getcwd()
-print 'cwd =', dir, '\n'
-print 'generating band list...\n'
+print('cwd =', dir, '\n')
+print('generating band list...\n')
 bands = get_band_list(dir)
 
 # Albumformat
@@ -23,9 +23,9 @@ bands = get_band_list(dir)
 # find_ugly_years(dir,bands)
 
 # Histogramm nach Jahren
-print 'generating dict of years...\n'
+print('generating dict of years...\n')
 d = get_dict_of_years(dir,bands)
-print 'generating histo...'
+print('generating histo...')
 histo(d,bands,'Jahre','Anzahl Alben','Titel')
 show()
 

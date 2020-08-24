@@ -49,13 +49,13 @@ def histo(d,bands,x='x',y='y',titel=''):
 			t.append(year)
 		
 		check[year] = len(d[year])
-	print '\ncheck histo:'
+	print('\ncheck histo:')
 	for item in check:
-		print item,'-',check[item]
+		print(item,'-',check[item])
 	
 	zeitraum = max(t) - min(t)
-	print len(check), 'Eintraege in einem Zeitraum von', zeitraum, 'Jahren\n'
-	print len(bands), 'Bands und', len(t), 'Alben erfasst\n'
+	print(len(check), 'Eintraege in einem Zeitraum von', zeitraum, 'Jahren\n')
+	print(len(bands), 'Bands und', len(t), 'Alben erfasst\n')
 	#print t, '\n'
 
 	h = hist(t, zeitraum+1)

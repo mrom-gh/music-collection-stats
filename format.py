@@ -17,9 +17,9 @@ def find_missing_years(dir, bands):
 				Alben mit mehreren CDs werden in Einzelfaellen (z.B. OSTs) noch zu Unrecht erkannt (falsch-Positive)'''
 				p = path.join(dirpath, subdir)
 				count +=1
-				print p
+				print(p)
 				#raw_input('next: press <Enter>')
-	print count
+	print(count)
 
 def find_ugly_years(dir,bands):
 	'''sucht Alben, bei denen das Jahr nicht im Standardformat "<Jahr> <Titel>" steht'''
@@ -33,4 +33,4 @@ def find_ugly_years(dir,bands):
 				Alben, die ein anderes Format haben, werden nicht erkannt (falsch-Negative!)
 				'''
 				p = path.join(dirpath, subdir)
-				print p
+				print(p)
