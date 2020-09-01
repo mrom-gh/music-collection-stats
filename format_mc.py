@@ -1,10 +1,12 @@
-from os import *
+'''Search the music collection for badly formatted directories.'''
+
+import os
 
 def find_missing_years(dir, bands):
 	'''sucht Alben in dir, die keine Jahreszahl im Ordnernamen haben
 	bands gibt dabei vor, welche Ordner als Bandordner erkannt werden'''
 	count = 0
-	for dirpath, subdirs, files in walk(dir):
+	for dirpath, subdirs, _ in os.walk(dir):
 		for subdir in subdirs:
 			words_in_subdir = subdir.split()
 			words_in_path = dirpath.split('/')
@@ -15,7 +17,7 @@ def find_missing_years(dir, bands):
 				
 				sind Lieder direkt im Bandordner, sollten die Alben jetzt korrekt erkannt werden (keine falsch-Negativen mehr);
 				Alben mit mehreren CDs werden in Einzelfaellen (z.B. OSTs) noch zu Unrecht erkannt (falsch-Positive)'''
-				p = path.join(dirpath, subdir)
+				p = os.path.join(dirpath, subdir)
 				count +=1
 				print(p)
 				#raw_input('next: press <Enter>')
@@ -23,7 +25,7 @@ def find_missing_years(dir, bands):
 
 def find_ugly_years(dir,bands):
 	'''sucht Alben, bei denen das Jahr nicht im Standardformat "<Jahr> <Titel>" steht'''
-	for dirpath, subdirs, files in walk(dir):
+	for dirpath, subdirs, _ in os.walk(dir):
 		for subdir in subdirs:
 			words_in_path = dirpath.split('/')
 			if words_in_path[-1] in bands and '-' in subdir[4:6]:
@@ -32,5 +34,5 @@ def find_ugly_years(dir,bands):
 				
 				Alben, die ein anderes Format haben, werden nicht erkannt (falsch-Negative!)
 				'''
-				p = path.join(dirpath, subdir)
+				p = os.path.join(dirpath, subdir)
 				print(p)
