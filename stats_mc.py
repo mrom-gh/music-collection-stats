@@ -14,7 +14,7 @@ def get_band_list(music_collection_path):
 		if dirpath == music_collection_path:
 			genres = subdirs
 
-		# Append bandfolders to bands and subgenrefolders to genres
+		# Append bandnames to bands and subgenrenames to genres
 		foldername = dirpath.split('/')[-1]
 		if foldername in genres:
 			for subdir in subdirs:
