@@ -8,7 +8,7 @@ interactive searches for badly formatted directories in the music
 collection.
 '''
 
-import sys, os
+import sys, os, re
 import matplotlib.pyplot as plt
 from music_collection import MusicCollection
 
@@ -19,12 +19,13 @@ from music_collection import MusicCollection
 # - mehrere musikordner
 # - zahl in histo vergleichen mit gesamtzahl der alben
 
-if len(sys.argv) > 1:
-    music_collection_path = sys.argv[1]
-else:
-    music_collection_path = os.getcwd()
-print("music_collection_path = %s \n" % music_collection_path)
+def get_music_collection_path():
+    if len(sys.argv) > 1:
+        return sys.argv[1]
+    else:
+        return os.getcwd()
 
+music_collection_path = get_music_collection_path()
 mc = MusicCollection(music_collection_path)
 mc.fill()
 mc.plot_histo()

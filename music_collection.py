@@ -3,76 +3,37 @@ collection and includes statistical methods for analyzing the
 collection.
 """
 
-import os
+# TODO: walk and append
+
+import os, re
 import matplotlib.pyplot as plt
 
 class MusicCollection:
 	def __init__(self, music_collection_path):
 		self.music_collection_path = music_collection_path
-		self.genres = []
-		self.bands = []
+		self.paths = []
+		self.list_of_years = []
 		self.dict_of_years = {}
-	
-	def walk_and_append(self, itemtype):
-		# TODO
-		for dirpath, subdirs, _ in os.walk(self.music_collection_path):
-			foldername = dirpath.split('/')[-1]
-			if foldername in self.genres:
-				for subdir in subdirs:
-					if subdir[0] == '#':
-						self.genres.append(subdir)
 
-	def get_genres(self):
-		# Get main genres as subfolders of music_collection_path
-		self.genres = next(os.walk(self.music_collection_path))[1]
-		
-		for dirpath, subdirs, _ in os.walk(self.music_collection_path):
-			foldername = dirpath.split('/')[-1]
-			if foldername in self.genres:
-				for subdir in subdirs:
-					if subdir[0] == '#':
-						self.genres.append(subdir)
-	
-	def get_bands(self):
-		'''Create a list of all band folders which are contained in the
-		music collection. Subgenre folders are expected to start with
-		a "#".
-		'''
-		for dirpath, subdirs, _ in os.walk(self.music_collection_path):
-			foldername = dirpath.split('/')[-1]
-			if foldername in self.genres:
-				for subdir in subdirs:
-					if subdir[0] != '#':
-						self.bands.append(subdir)
+	def get_all_paths(self):
+		for path, dirs, files in os.walk(self.music_collection_path):
+			paths.append(self.path)
+
+	def get_list_of_years(self):
+		r = re.compile(r'([1-2][0-9]{3}).*$')  # .../1994 ...
+		matches = [r.findall(path) for path in self.paths]  # [None, ['1994 ...'], ...]
+		self.list_of_years = [match[0] for match in matches if match]  # ['1994', ...]
 
 	def get_dict_of_years(self):
-		'''Create a dict which groups the albums of the music collection
-		by years.
-		'''
-		for dirpath, subdirs, _ in os.walk(self.music_collection_path):
-			for subdir in subdirs:
-				folders_in_subdir = subdir.split()
-				foldername = dirpath.split('/')[-1]
-				
-				if foldername in self.bands and folders_in_subdir[0][0] in ['1', '2']:
-					# Check if the folder is a band folder and if the
-					# subdir begins with a year; then append to the corres-
-					# ponding year in dict_of_years.
-					year = int(folders_in_subdir[0])
-					if year not in self.dict_of_years:
-						self.dict_of_years[year] = []
-					self.dict_of_years[year].append(subdir)
+		for year in self.list_of_years:
+			self.dict_of_years[year] = self.list_of_years.count(year)
 
-	def fill(self):
-		self.get_genres()
-		self.get_bands()
+	def fill():
+		self.get_all_paths()
+		self.get_list_of_years()
 		self.get_dict_of_years()
-	
+
 	def plot_histo(self):
-		x = list(self.dict_of_years.keys())
-		y = [len(self.dict_of_years[key]) for key in self.dict_of_years]
-		plt.bar(x, y)
-		plt.xlabel('Jahr')
-		plt.ylabel('Anzahl Alben')
-		plt.title('Anzahl Alben pro Jahr')
+		
+		plt.bar(self.list_of_years, bins='auto')
 		plt.show()
