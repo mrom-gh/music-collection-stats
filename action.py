@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 '''Traverse a music collection and create a histogram of albums per
 year. If no path is given, use the cwd.
 
@@ -12,7 +13,7 @@ import matplotlib.pyplot as plt
 from stats_mc import get_band_list, get_dict_of_years, histo
 
 # to do:
-# - moeglichkeit, band liste und dict zu speichern
+# - moeglichkeit, band liste und dict zu speichern -> db
 # - return histo
 # - zeitraum suche
 # - mehrere musikordner
