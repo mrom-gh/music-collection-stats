@@ -8,8 +8,7 @@ interactive searches for badly formatted directories in the music
 collection.
 '''
 
-import sys, os, re
-import matplotlib.pyplot as plt
+import sys, os
 from music_collection import MusicCollection
 
 # to do:
