@@ -2,7 +2,7 @@
 '''Traverse a music collection and create a histogram of albums per
 year. If no path is given, use the cwd.
 
-The module stats_mc contains the functions ``find_missing_years(dir,
+The module format_mc contains the functions ``find_missing_years(dir,
 bands)`` and ``find_ugly_years(dir, bands)`` which can be used for
 interactive searches for badly formatted directories in the music
 collection.
