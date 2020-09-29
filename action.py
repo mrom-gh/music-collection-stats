@@ -10,7 +10,7 @@ collection.
 
 import sys, os
 import matplotlib.pyplot as plt
-from stats_mc import get_band_list, get_dict_of_years, histo
+from music_collection import MusicCollection
 
 # to do:
 # - moeglichkeit, band liste und dict zu speichern -> db
@@ -20,17 +20,11 @@ from stats_mc import get_band_list, get_dict_of_years, histo
 # - zahl in histo vergleichen mit gesamtzahl der alben
 
 if len(sys.argv) > 1:
-    dir = sys.argv[1]
+    music_collection_path = sys.argv[1]
 else:
-    dir = os.getcwd()
-print("\ndir = %s \n" % dir)
+    music_collection_path = os.getcwd()
+print("music_collection_path = %s \n" % music_collection_path)
 
-print('generating band list...\n')
-bands = get_band_list(dir)
-
-print('generating dict of years...\n')
-d = get_dict_of_years(dir,bands)
-
-print('generating histogram...')
-histo(d,bands,'Jahre','Anzahl Alben','Titel')
-plt.show()
+mc = MusicCollection(music_collection_path)
+mc.fill()
+mc.plot_histo()
